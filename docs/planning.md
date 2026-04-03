@@ -48,7 +48,7 @@ The planner is given a goal, along with the world's state and a list of valid ac
  
 ### Necessary Components
 
-- Action
+- Action 
 - Planner
 - Agent
 - FSM
