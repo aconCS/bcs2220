@@ -1,1 +1,1 @@
-package fsm.fsm_state;
+package state_machine.states;
