@@ -1,0 +1,8 @@
+src/main/java/state_machine/state_machine.java
+src/main/java/state_machine/states/mock_state.java
+src/main/java/actions/EatAction.java
+src/main/java/actions/FeedCampfireAction.java
+src/main/java/actions/ChopAction.java
+src/main/java/actions/FishAction.java
+src/main/java/WorldState.java
+src/test/java/WorldStateTest.java
