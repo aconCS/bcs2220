@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class WorldStateTest {
+public class WorldStateTest {
   @Test
   void initializeWorldTest1() {
     String[][] expected = {
