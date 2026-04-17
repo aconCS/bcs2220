@@ -2,10 +2,14 @@ package actions;
 
 import states.*;
 
-public final record ChopAction (String actionName, int cost) implements Action {
+public final record ChopAction(String actionName, int cost) implements Action {
+    public String getName() {
+        return actionName;
+    }
 
-    public String getName() { return actionName; }
-    public int getCost() { return cost; }
+    public int getCost() {
+        return cost;
+    }
 
     public boolean checkIfAllowed(WorldState worldState, String agentName) {
         AgentState agentState = worldState.getAgentState(agentName);
@@ -13,10 +17,13 @@ public final record ChopAction (String actionName, int cost) implements Action {
     }
 
     public WorldState executeAction(WorldState worldState, String agentName) {
-        AgentState firstAgentState = worldState.getAgentState(agentName);
-        AgentState secondAgentState = firstAgentState.changeWoodCount(1);
-        WorldState firstWorldState = worldState.changeAgentState(agentName, secondAgentState);
-        WorldState secondWorldState = firstWorldState.changeTreeCount(-1);
-        return secondWorldState;
+        AgentState oldAgentState = worldState.getAgentState(agentName);
+        AgentState newAgentState = oldAgentState.changeWoodCount(1);
+        WorldState oldWorldState = worldState.changeAgentState(
+            agentName,
+            newAgentState
+        );
+        WorldState newWorldState = oldWorldState.changeTreeCount(-1);
+        return newWorldState;
     }
 }
