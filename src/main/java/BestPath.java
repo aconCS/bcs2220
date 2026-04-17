@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import actions.Action;
+import states.WorldState;
 
 record Path(WorldState state, int srcToCurrentCost, List<Action> actionPath) {}
 
