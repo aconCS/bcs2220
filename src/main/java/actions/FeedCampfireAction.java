@@ -1,3 +1,3 @@
 package actions;
 
-public record FeedCampfireAction (String action, int weight, String effect, String[] preReq) {}
+public final record FeedCampfireAction (String action, int cost, String effect, String[] preReq) implements Action {}

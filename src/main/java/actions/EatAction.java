@@ -1,3 +1,3 @@
 package actions;
 
-public record EatAction (String action, int weight, String effect, String[] preReq) {}
+public final record EatAction (String action, int cost, String effect, String[] preReq) implements Action {}
