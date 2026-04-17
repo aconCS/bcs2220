@@ -1,5 +1,7 @@
 package actions;
 
+import states.*;
+
 public sealed interface Action permits ChopAction, EatAction, FeedCampfireAction, FishAction {
     String getName();
     int getCost();
