@@ -11,7 +11,7 @@ public final record ChopAction(String actionName, int cost) implements Action {
         return cost;
     }
 
-    public boolean checkIfAllowed(WorldState worldState, String agentName) {
+    public boolean isValidAction(WorldState worldState, String agentName) {
         AgentState agentState = worldState.getAgentState(agentName);
         return agentState != null && worldState.getTrees() > 0;
     }
@@ -19,10 +19,7 @@ public final record ChopAction(String actionName, int cost) implements Action {
     public WorldState executeAction(WorldState worldState, String agentName) {
         AgentState oldAgentState = worldState.getAgentState(agentName);
         AgentState newAgentState = oldAgentState.changeWoodCount(1);
-        WorldState oldWorldState = worldState.changeAgentState(
-            agentName,
-            newAgentState
-        );
+        WorldState oldWorldState = worldState.changeAgentState(agentName, newAgentState);
         WorldState newWorldState = oldWorldState.changeTreeCount(-1);
         return newWorldState;
     }
