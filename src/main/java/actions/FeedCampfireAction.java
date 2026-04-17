@@ -12,7 +12,7 @@ public final record FeedCampfireAction (String actionName, int cost) implements 
         return agentState != null && agentState.getFish() > 0;
     }
 
-    public WorldState executeAction(WorldState worldState, String agentName) {
+    public WorldState execute(WorldState worldState, String agentName) {
         AgentState firstAgentState = worldState.getAgentState(agentName);
         AgentState secondAgentState = firstAgentState.changeCampfire(5);
         return worldState.changeAgentState(agentName, secondAgentState);

@@ -1,6 +1,6 @@
 package states;
 
-public record AgentState(int wood, int fish, int fullness, int campfire) {
+public final record AgentState(int wood, int fish, int fullness, int campfire) {
     public int getWood() { return wood; }
     public int getFish() { return fish; }
     public int getFullness() { return fullness; }

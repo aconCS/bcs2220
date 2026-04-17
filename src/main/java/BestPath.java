@@ -37,10 +37,18 @@ public final class BestPath{
     return new Path(null, 0, null);
   }
 
-  private static WorldState getNextState(Action action) {
-    if (action.preReq) {
-      action.effect;
-      return new String[4][2];
+  private static WorldState getNextState(WorldState worldState, String agentName, Action action) {
+    if (action.checkIfAllowed(worldState, agentName)) {
+      return action.execute(worldState, agentName);
     }
+    return null;
   }
+
+  public static Path AStar(WorldState worldState, String agentName, int srcToCurrentCost, int maxDailyCost) {
+    return;
+  }
+
+  public int heuristic(WorldState worldState, String agentName) {
+        return;
+    }
 }

@@ -12,7 +12,7 @@ public final record EatAction (String actionName, int cost) implements Action {
         return agentState != null && agentState.getFish() > 0;
     }
 
-    public WorldState executeAction(WorldState worldState, String agentName) {
+    public WorldState execute(WorldState worldState, String agentName) {
         AgentState firstAgentState = worldState.getAgentState(agentName);
         AgentState secondAgentState = firstAgentState.changeFullness(5);
         return worldState.changeAgentState(agentName, secondAgentState);

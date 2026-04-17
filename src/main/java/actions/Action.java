@@ -6,5 +6,5 @@ public sealed interface Action permits ChopAction, EatAction, FeedCampfireAction
     String getName();
     int getCost();
     boolean checkIfAllowed(WorldState worldState, String agentName);
-    WorldState executeAction(WorldState worldState, String agentName);
+    WorldState execute(WorldState worldState, String agentName);
 }
