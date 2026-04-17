@@ -28,8 +28,8 @@ public final class BestPath{
     return bestPath;
   }
 
-  private static boolean isFinalState(WorldState state) {
-    return (Integer.valueOf(state.fullness()) > 0 && Integer.valueOf(state[3][1]) == 100);
+  private static boolean isFinalState(WorldState worldState, String agentName) {
+    return worldState.getAgentState(agentName).getCampfire() >= 100;
   }
 
   private static Path comparePaths(Path path1, Path path2) {
