@@ -16,7 +16,7 @@ public final record ChopAction(String actionName, int cost) implements Action {
         return agentState != null && worldState.getTrees() > 0;
     }
 
-    public WorldState executeAction(WorldState worldState, String agentName) {
+    public WorldState execute(WorldState worldState, String agentName) {
         AgentState oldAgentState = worldState.getAgentState(agentName);
         AgentState newAgentState = oldAgentState.changeWoodCount(1);
         WorldState oldWorldState = worldState.changeAgentState(
