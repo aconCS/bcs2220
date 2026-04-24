@@ -10,6 +10,6 @@ class Main {
   while(running) {
     running = checkIfGameOn(world);
 
-    
+    // Gameplay
   }
 }

@@ -9,7 +9,7 @@ public final record FishAction (String actionName, int cost) implements Action {
 
     public boolean checkIfAllowed(WorldState worldState, String agentName) {
         AgentState agentState = worldState.getAgentState(agentName);
-        return agentState != null && worldState.getTrees() > 0;
+        return agentState != null && worldState.fish() > 0;
     }
 
     public WorldState execute(WorldState worldState, String agentName) {
