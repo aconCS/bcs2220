@@ -3,12 +3,9 @@ package actions;
 import states.*;
 
 public final record ChopAction(String actionName, int cost) implements Action {
-    public String getName() {
-        return actionName;
-    }
-
-    public int getCost() {
-        return cost;
+    
+    public ChopAction {
+        if (cost < 0) { throw new IllegalStateException("Action cost must be at least zero."); }
     }
 
     public boolean checkIfAllowed(WorldState worldState, String agentName) {

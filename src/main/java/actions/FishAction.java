@@ -4,8 +4,9 @@ import states.*;
 
 public final record FishAction (String actionName, int cost) implements Action {
 
-    public String getName() { return actionName; }
-    public int getCost() { return cost; }
+    public FishAction {
+        if (cost < 0) { throw new IllegalStateException("Action cost must be at least zero."); }
+    }
 
     public boolean checkIfAllowed(WorldState worldState, String agentName) {
         AgentState agentState = worldState.getAgentState(agentName);

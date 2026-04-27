@@ -27,7 +27,8 @@ public class AgentStateTest {
                 0, 
                 0
             ).changeWoodCount(-10)
-        );String expectedMessage = "Woodcount must be at least zero.";
+        );
+        String expectedMessage = "Woodcount must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -54,7 +55,8 @@ public class AgentStateTest {
                 0, 
                 0
             ).changeFishCount(-10)
-        );String expectedMessage = "Fishcount must be at least zero.";
+        );
+        String expectedMessage = "Fishcount must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -81,7 +83,8 @@ public class AgentStateTest {
                 0, 
                 0
             ).changeFullness(-10)
-        );String expectedMessage = "Fullness must be at least zero.";
+        );
+        String expectedMessage = "Fullness must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -108,7 +111,8 @@ public class AgentStateTest {
                 0, 
                 0
             ).changeCampfire(-10)
-        );String expectedMessage = "Campfire must be at least zero.";
+        );
+        String expectedMessage = "Campfire must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
