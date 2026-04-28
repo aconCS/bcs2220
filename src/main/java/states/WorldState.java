@@ -2,17 +2,17 @@ package states;
 import java.util.HashMap;
 import java.util.Map;
 
-public final record WorldState(int trees, int fish, Map<String, AgentState> agents, int day, int maxCost) {
+public final record WorldState(int trees, int fish, Map<String, AgentState> agents, int day, int maxDailyCost) {
     
     public AgentState getAgentState(String agentName) { return agents.get(agentName); }
 
-    public WorldState changeDay() { return new WorldState(trees, fish, agents, day + 1, maxCost); }
-    public WorldState changeTreeCount(int newTreeCount) { return new WorldState(trees + newTreeCount, fish, agents, day, maxCost); }
-    public WorldState changeFishCount(int newFishCount) { return new WorldState(trees, fish + newFishCount, agents, day, maxCost); }
+    public WorldState changeDay() { return new WorldState(trees, fish, agents, day + 1, maxDailyCost); }
+    public WorldState changeTreeCount(int newTreeCount) { return new WorldState(trees + newTreeCount, fish, agents, day, maxDailyCost); }
+    public WorldState changeFishCount(int newFishCount) { return new WorldState(trees, fish + newFishCount, agents, day, maxDailyCost); }
     public WorldState changeAgentState(String agentName, AgentState newAgentState) {
         Map<String, AgentState> newAgents = new HashMap<>(agents);
         newAgents.put(agentName, newAgentState);
-        return new WorldState(trees, fish, newAgents, day, maxCost);
+        return new WorldState(trees, fish, newAgents, day, maxDailyCost);
     }
 
     public Map<String, Object> getState() {
@@ -21,7 +21,7 @@ public final record WorldState(int trees, int fish, Map<String, AgentState> agen
             "fish", fish,
             "agents", agents,
             "day", day,
-            "maxCost", maxCost
+            "maxDailyCost", maxDailyCost
         );
     }
 }

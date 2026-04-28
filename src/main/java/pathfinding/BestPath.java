@@ -1,3 +1,5 @@
+package pathfinding;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -8,7 +10,6 @@ import java.util.stream.Stream;
 import actions.Action;
 import states.WorldState;
 
-record Path(WorldState worldState, String agentName, List<Action> actionPath) {}
 record Node(WorldState worldState, String agentName, int g, int h, List<Action> actionPath) {
   int getF() { return g + h; }
   Path getPath() { return new Path(worldState, agentName, actionPath); }
@@ -52,7 +53,7 @@ public final class BestPath{
     Path bestPath = current.getPath();
     for (Action action : allActions) {
       if (!action.checkIfAllowed(current.worldState(), current.agentName())) { continue; }
-      int newG = action.getCost() + current.g();
+      int newG = action.cost() + current.g();
       if (newG > maxDailyCost) { continue; }
 
       WorldState newState = action.execute(current.worldState(), current.agentName());

@@ -19,6 +19,11 @@ public class ActionsTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
+      
+    @Test
+    void createChop ActionTest1() {
+      assertEquals(new ChopAction("ChopAction", 10), new ChopAction("ChopAction"), 10);
+    }
 
     @Test
     void createEatActionTest0() {
@@ -29,6 +34,11 @@ public class ActionsTest {
         String expectedMessage = "Action cost must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void createEatActionTest1() {
+      assertEquals(new EatAction("EatAction", 10)).;
     }
 
     @Test
@@ -43,12 +53,22 @@ public class ActionsTest {
     }
 
     @Test
-    void createChopActionTest0() {
+    void createFeedCampfireActionTest1() {
+      assertEquals(new FeedCampfireAction("FeedCampfireAction", 10));
+    }
+
+    @Test
+    void createFishActionTest0() {
         Exception exception = assertThrowsExactly(
             IllegalStateException.class, 
-            () -> new ChopAction(null, -1)
+            () -> new FishAction(null, -1)
         );String expectedMessage = "Action cost must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void createFishActionTest1() {
+      assertEquals(new FishAction("FishAction", 10), new FishAction("FishAction", 10));
     }
 }
