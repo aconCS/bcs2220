@@ -4,29 +4,29 @@ import org.junit.jupiter.api.Test;
 import states.AgentState;
 
 public class AgentStateTest {
-    
+
     @Test
-    void changeWoodCountTest0() {
+    void changeWoodCountTestPositive() {
         assertEquals(
-            10, 
+            10,
             new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeWoodCount(10));
+            ).changeWoodCount(10).wood());
     }
 
     @Test
-    void changeWoodCountTest1() {
+    void changeWoodCountTestNegative() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeWoodCount(-10)
+            ).changeWoodCount(-10).wood()
         );
         String expectedMessage = "Woodcount must be at least zero.";
         String actualMessage = exception.getMessage();
@@ -34,27 +34,27 @@ public class AgentStateTest {
     }
 
     @Test
-    void changeFishCountTest0() {
+    void changeFishCountTestPositive() {
         assertEquals(
-            10, 
+            10,
             new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeFishCount(10));
+            ).changeFishCount(10).fish());
     }
 
     @Test
-    void changeFishCountTest1() {
+    void changeFishCountTestNegative() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeFishCount(-10)
+            ).changeFishCount(-10).fish()
         );
         String expectedMessage = "Fishcount must be at least zero.";
         String actualMessage = exception.getMessage();
@@ -62,27 +62,27 @@ public class AgentStateTest {
     }
 
     @Test
-    void changeFullnessTest0() {
+    void changeFullnessTestPositive() {
         assertEquals(
-            10, 
+            10,
             new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeFullness(10));
+            ).changeFullness(10).fullness());
     }
 
     @Test
-    void changeFullnessest1() {
+    void changeFullnessestNegative() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeFullness(-10)
+            ).changeFullness(-10).fullness()
         );
         String expectedMessage = "Fullness must be at least zero.";
         String actualMessage = exception.getMessage();
@@ -90,27 +90,27 @@ public class AgentStateTest {
     }
 
     @Test
-    void changeCampfireTest0() {
+    void changeCampfireTestPositive() {
         assertEquals(
-            10, 
+            10,
             new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeCampfire(10));
+            ).changeCampfire(10).campfire());
     }
 
     @Test
-    void changeCampfireTest1() {
+    void changeCampfireTestNegative() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new AgentState(
-                0, 
-                0, 
-                0, 
+                0,
+                0,
+                0,
                 0
-            ).changeCampfire(-10)
+            ).changeCampfire(-10).campfire()
         );
         String expectedMessage = "Campfire must be at least zero.";
         String actualMessage = exception.getMessage();

@@ -11,7 +11,7 @@ import states.WorldState;
 public class WorldStateTest {
 
     @Test
-    void initializeWorldTest0() {
+    void initializeWorldTest() {
         Map<String, Object> expected = Map.of(
             "trees", 100,
             "fish", 100,
@@ -23,7 +23,8 @@ public class WorldStateTest {
     }
 
     @Test
-    void initializeWorldTest1() {
+    // TODO: change logic to reflect negative trees
+    void initializeWorldTestNegativeTrees() {
         Map<String, Object> expected = Map.of(
             "trees", -100,
             "fish", 7,
@@ -32,95 +33,95 @@ public class WorldStateTest {
             "maxCost", 100
         );
         assertEquals(
-            expected, 
+            expected,
             new WorldState(
-                -100, 
-                7, 
+                -100,
+                7,
                 Map.of(
-                    "agent1", 
+                    "agent1",
                     new AgentState(0, 0, 0, 0)
-                ), 
-                100, 
+                ),
+                100,
                 100
             ));
     }
 
     @Test
-    void changeTreeCountTest0() {
+    void changeTreeCountTestNegative() {
         WorldState worldState = new WorldState(100, 100, null, 100, 100);
         worldState.changeTreeCount(-200);
         assertEquals(-100, worldState.trees());
     }
 
     @Test
-    void changeTreeCountTest1() {
+    void changeTreeCountTestPositive() {
         WorldState worldState = new WorldState(100, 100, null, 100, 100);
         worldState.changeTreeCount(200);
         assertEquals(300, worldState.trees());
     }
 
     @Test
-    void changeFishCountTest0() {
+    void changeFishCountTestNegative() {
         WorldState worldState = new WorldState(100, 100, null, 100, 100);
         worldState.changeFishCount(-200);
         assertEquals(-100, worldState.fish());
     }
 
     @Test
-    void changeFishCountTest1() {
+    void changeFishCountTestPositive() {
         WorldState worldState = new WorldState(100, 100, null, 100, 100);
         worldState.changeFishCount(200);
         assertEquals(300, worldState.fish());
     }
 
     @Test
-    void changeDayTest0() {
+    void changeDayTest() {
         WorldState worldState = new WorldState(100, 100, null, 100, 100);
         worldState.changeDay();
         assertEquals(101, worldState.day());
     }
 
     @Test
-    void changeAgentStateTest0() {
+    void changeAgentStateTestNewAgent() {
         AgentState agentState = new AgentState(
-            0, 
-            0, 
-            0, 
+            0,
+            0,
+            0,
             0
         );
         WorldState worldState = new WorldState(
-            0, 
-            0, 
-            null, 
-            0, 
+            0,
+            0,
+            null,
+            0,
             0
         );
         assertEquals(agentState, worldState.changeAgentState("agent0", agentState).getAgentState("agent0"));
     }
 
     @Test
-    void changeAgentStateTest1() {
-        AgentState defaultAgentState = new AgentState(
-            0, 
-            0, 
-            0, 
+    void changeAgentStateTest() {
+        AgentState oldAgentState = new AgentState(
+            0,
+            0,
+            0,
             0
         );
-        AgentState agentState = new AgentState(
-            0, 
-            0, 
-            100, 
+        AgentState newAgentState = new AgentState(
+            0,
+            0,
+            100,
             0
         );
         WorldState worldState = new WorldState(
-            0, 
-            0, 
+            0,
+            0,
             Map.of(
-                "agent0", defaultAgentState
-            ), 
-            0, 
+                "agent0", oldAgentState
+            ),
+            0,
             0
         );
-        assertEquals(agentState, worldState.changeAgentState("agent0", agentState).getAgentState("agent0"));
+        assertEquals(oldAgentState, worldState.changeAgentState("agent0", newAgentState).getAgentState("agent0"));
     }
 }
