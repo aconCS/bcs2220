@@ -96,7 +96,14 @@ public class WorldStateTest {
             0,
             0
         );
-        assertEquals(agentState, worldState.changeAgentState("agent0", agentState).getAgentState("agent0"));
+
+        Exception exception = assertThrowsExactly(
+            IllegalStateException.class,
+            () -> worldState.changeAgentState("agent0", agentState).getAgentState("agent0")
+        );
+        String expectedMessage = "Cannot change non-existent Agent's state";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
