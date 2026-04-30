@@ -15,7 +15,9 @@ public final record FeedCampfireAction (String actionName, int cost) implements 
 
     public WorldState execute(WorldState worldState, String agentName) {
         AgentState firstAgentState = worldState.getAgentState(agentName);
-        AgentState secondAgentState = firstAgentState.changeCampfire(5);
-        return worldState.changeAgentState(agentName, secondAgentState);
+        AgentState secondAgentState = firstAgentState.changeCampfire(1);
+        AgentState thirdAgentState = secondAgentState.changeWoodCount(-1);
+        WorldState newWorldState = worldState.changeAgentState(agentName, thirdAgentState);
+        return newWorldState;
     }
 }

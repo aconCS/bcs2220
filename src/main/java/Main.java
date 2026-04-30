@@ -11,10 +11,12 @@ class Main {
   public static void main(String[] args) {
     int trees = 100;
     int fish = 100;
-    int maxDailyCost = 5;
-    WorldState mainWorld = new WorldState(trees, fish, initializeAgentList(1), 0, maxDailyCost);
+    int maxDailyCost = 7;
+    int maxAgentCount = 1;
+    WorldState mainWorld = new WorldState(trees, fish, initializeAgentList(maxAgentCount), 0, maxDailyCost);
+    int maxDayCount = 5;
 
-    while(checkIfGameOn(mainWorld)) {
+    while(checkIfGameOn(mainWorld, maxDayCount)) {
       System.out.println("DAY " + mainWorld.day() + "\n");
       WorldState newWorldState = mainWorld;
       for(String agent : newWorldState.agents().keySet()) {
@@ -25,6 +27,7 @@ class Main {
       mainWorld = newWorldState;
       System.out.println("\nEND OF DAY " + mainWorld.day() + "\n\n\n");
       mainWorld = mainWorld.changeDay();
+      mainWorld = mainWorld.updateAllAgentFullness(-1);
     }
   }
 
@@ -38,7 +41,7 @@ class Main {
     return agentList;
   }
 
-  private static boolean checkIfGameOn(WorldState worldState) {
-    return worldState.day() >=5 ? false: true;
+  private static boolean checkIfGameOn(WorldState worldState, int maxDayCount) {
+    return worldState.day() >= maxDayCount ? false: true;
   }
 }

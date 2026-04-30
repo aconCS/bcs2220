@@ -18,6 +18,15 @@ public final record WorldState(int trees, int fish, Map<String, AgentState> agen
         return new WorldState(trees, fish, newAgents, day, maxDailyCost);
     }
 
+    public WorldState updateAllAgentFullness(int difference) {
+        WorldState newWorldState = this;
+        for (String agentName : agents.keySet()) {
+            AgentState newAgentState = agents.get(agentName).changeFullness(-1);
+            newWorldState = this.changeAgentState(agentName, newAgentState);
+        }
+        return newWorldState;
+    }
+
     public Map<String, Object> getState() {
         return Map.of(
             "trees", trees,

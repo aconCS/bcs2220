@@ -58,10 +58,12 @@ public final class BestPath{
     //System.out.println(allActions);
     for (Action action : allActions) {
       if (!action.checkIfAllowed(current.worldState(), current.agentName())) { continue; }
+      //System.out.println(current.worldState());
       int newG = action.cost() + current.g();
       if (newG > current.worldState().maxDailyCost()) { continue; }
 
       WorldState newState = action.execute(current.worldState(), current.agentName());
+      //System.out.println(newState);
       List<Action> newActionPath = Stream.concat(current.actionPath().stream(), List.of(action).stream()).collect(Collectors.toList());
       int newH = 100 - newState.getAgentState(current.agentName()).campfire();
       Node newNode = new Node(newState, current.agentName(), newG, newH, newActionPath);
