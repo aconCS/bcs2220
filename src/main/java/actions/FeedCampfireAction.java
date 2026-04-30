@@ -10,7 +10,7 @@ public final record FeedCampfireAction (String actionName, int cost) implements 
 
     public boolean checkIfAllowed(WorldState worldState, String agentName) {
         AgentState agentState = worldState.getAgentState(agentName);
-        return agentState != null && agentState.fish() > 0;
+        return agentState != null && agentState.wood() > 0;
     }
 
     public WorldState execute(WorldState worldState, String agentName) {

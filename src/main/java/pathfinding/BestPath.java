@@ -8,11 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import actions.Action;
+import states.AgentState;
 import states.WorldState;
 
 record Node(WorldState worldState, String agentName, int g, int h, List<Action> actionPath) {
-  int getF() { return g + h; }
-  Path getPath() { return new Path(worldState, agentName, actionPath); }
+  AgentState agentState() { return worldState.getAgentState(agentName); }
+  int f() { return g + h; }
+  Path getPath() { return new Path(worldState, agentName, actionPath, h); }
 }
 record Pair(WorldState worldState, String agentName) {}
 
@@ -21,29 +23,29 @@ public final class BestPath{
     return worldState.getAgentState(agentName).campfire() >= 100;
   }
 
-  public static Path bestPath(WorldState worldState, String agentName, int maxDailyCost, List<Action> allActions) {
+  public static Path bestPath(WorldState worldState, String agentName, List<Action> allActions) {
     Node start = new Node(worldState, agentName, 0, heuristic(worldState, agentName), List.of());
     PriorityQueue<Node> openList = new PriorityQueue<Node>( Comparator
-      .comparingInt(Node::getF)
+      .comparingInt(Node::f)
       .thenComparingInt(Node::h)
     );
     openList.add(start);
     List<Node> closedList = List.of();
-    return AStar(openList, closedList, maxDailyCost, allActions);
+    return AStar(openList, closedList, allActions);
   }
 
   private static Path AStar(
-    PriorityQueue<Node> openList, List<Node> closedList, int maxDailyCost, List<Action> allActions
+    PriorityQueue<Node> openList, List<Node> closedList, List<Action> allActions
   ) {
     if (openList.isEmpty()) { return null; }
 
     Node current = openList.peek();
-    if (current.g() > maxDailyCost) { return null; }
+    if (current.g() > current.worldState().maxDailyCost()) { return null; }
 
     if (isFinalState(current.worldState(), current.agentName())) { return current.getPath(); }
     
-    Pair pair = new Pair(current.worldState(), current.agentName());
-    if (closedList.contains(pair)) { return null; }
+    //Pair pair = new Pair(current.worldState(), current.agentName());
+    if (closedList.contains(current)) { return null; }
 
     List<Node> newClosedList = new ArrayList<>(closedList);
     newClosedList.add(current);
@@ -51,10 +53,13 @@ public final class BestPath{
     newOpenList.poll();
 
     Path bestPath = current.getPath();
+    //System.out.println("BestPATH");
+    //System.out.println(bestPath);
+    //System.out.println(allActions);
     for (Action action : allActions) {
       if (!action.checkIfAllowed(current.worldState(), current.agentName())) { continue; }
       int newG = action.cost() + current.g();
-      if (newG > maxDailyCost) { continue; }
+      if (newG > current.worldState().maxDailyCost()) { continue; }
 
       WorldState newState = action.execute(current.worldState(), current.agentName());
       List<Action> newActionPath = Stream.concat(current.actionPath().stream(), List.of(action).stream()).collect(Collectors.toList());
@@ -62,7 +67,11 @@ public final class BestPath{
       Node newNode = new Node(newState, current.agentName(), newG, newH, newActionPath);
 
       newOpenList.add(newNode);
-      Path newPath = AStar(newOpenList, newClosedList, maxDailyCost, allActions);
+      //System.out.println("Before ASTAR");
+      Path newPath = AStar(newOpenList, newClosedList, allActions);
+      //System.out.println("After ASTAR");
+      //System.out.println("NewPATH");
+      //System.out.println(newPath);
       bestPath = comparePath(bestPath, newPath);
     }
     
@@ -70,7 +79,7 @@ public final class BestPath{
   }
 
   private static Path comparePath(Path one, Path two) {
-    return one.actionPath().size() <= two.actionPath().size() ? one : two;
+    return one.finalH() <= two.finalH() ? one : two;
   }
 
   private static int heuristic(WorldState worldState, String agentName) {

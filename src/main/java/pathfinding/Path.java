@@ -5,4 +5,4 @@ import states.WorldState;
 
 import java.util.List;
 
-public record Path(WorldState worldState, String agentName, List<Action> actionPath) {}
+public record Path(WorldState finalWorldState, String agentName, List<Action> actionPath, int finalH) {}
