@@ -4,31 +4,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import actions.ChopAction;
-import actions.FeedCampfireAction;
+import actions.*;
 
 public class ActionsTest {
 
     @Test
-    void createChopActionTest0() {
+    void createChopActionTestNegativeCost() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new ChopAction(null, -1)
         );
         String expectedMessage = "Action cost must be at least zero.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
-      
+
     @Test
-    void createChop ActionTest1() {
-      assertEquals(new ChopAction("ChopAction", 10), new ChopAction("ChopAction"), 10);
+    void createChopActionTest() {
+      assertEquals(new ChopAction("ChopAction", 10), new ChopAction("ChopAction", 10));
     }
 
     @Test
-    void createEatActionTest0() {
+    void createEatActionTestNegativeCost() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new EatAction(null, -1)
         );
         String expectedMessage = "Action cost must be at least zero.";
@@ -37,14 +36,14 @@ public class ActionsTest {
     }
 
     @Test
-    void createEatActionTest1() {
-      assertEquals(new EatAction("EatAction", 10)).;
+    void createEatActionTest() {
+      assertEquals(new EatAction("EatAction", 10), new EatAction("EatAction", 10));
     }
 
     @Test
-    void createFeedCampfireActionTest0() {
+    void createFeedCampfireActionTestNegativeCost() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new FeedCampfireAction(null, -1)
         );
         String expectedMessage = "Action cost must be at least zero.";
@@ -53,14 +52,14 @@ public class ActionsTest {
     }
 
     @Test
-    void createFeedCampfireActionTest1() {
-      assertEquals(new FeedCampfireAction("FeedCampfireAction", 10));
+    void createFeedCampfireActionTest() {
+      assertEquals(new FeedCampfireAction("FeedCampfireAction", 10), new FeedCampfireAction("FeedCampfireAction", 10));
     }
 
     @Test
-    void createFishActionTest0() {
+    void createFishActionTestNegativeCost() {
         Exception exception = assertThrowsExactly(
-            IllegalStateException.class, 
+            IllegalStateException.class,
             () -> new FishAction(null, -1)
         );String expectedMessage = "Action cost must be at least zero.";
         String actualMessage = exception.getMessage();
@@ -68,7 +67,7 @@ public class ActionsTest {
     }
 
     @Test
-    void createFishActionTest1() {
+    void createFishActionTest() {
       assertEquals(new FishAction("FishAction", 10), new FishAction("FishAction", 10));
     }
 }
